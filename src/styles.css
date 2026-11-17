@@ -1,0 +1,1554 @@
+:root {
+  --nuit: #0a1622;
+  --nuit-2: #101f2e;
+  --panneau: #14263a;
+  --trait: #1d3448;
+  --terre: #16283a;
+  --texte: #eaf2f8;
+  --doux: #7e96ab;
+  --soleil: #ffc145;
+  --signal: #56a8ff;
+  --vert: #7be0a8;
+  --rayon: 10px;
+  font-family: 'Space Grotesk Variable', 'Space Grotesk', system-ui, sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#racine {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--nuit);
+  color: var(--texte);
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border-radius: var(--rayon);
+}
+
+:focus-visible {
+  outline: 3px solid var(--soleil);
+  outline-offset: 3px;
+}
+
+/* ───────────────────────── Carte ───────────────────────── */
+
+.carte {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.carte .provinces path {
+  fill: var(--terre);
+  stroke: var(--trait);
+  stroke-width: 1.4;
+  stroke-linejoin: round;
+}
+
+.carte .reperes circle {
+  fill: var(--doux);
+  opacity: 0.5;
+}
+
+.carte .reperes text {
+  fill: var(--doux);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  opacity: 0.75;
+}
+
+.carte .liens line {
+  stroke-linecap: round;
+}
+
+.carte .onde {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2;
+  animation: onde 2.2s ease-out 3;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@keyframes onde {
+  0% {
+    r: 6;
+    opacity: 0.9;
+    stroke-width: 3;
+  }
+  100% {
+    r: 60;
+    opacity: 0;
+    stroke-width: 0.5;
+  }
+}
+
+/* ───────────────────────── Écran mur ───────────────────────── */
+
+.mur {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 23rem 1fr 23rem;
+  gap: 1.5rem;
+  padding: 1.75rem 2rem;
+  position: relative;
+  background:
+    radial-gradient(120% 90% at 50% 0%, #12233480 0%, transparent 70%),
+    var(--nuit);
+}
+
+.mur .colonne {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.mur .scene {
+  position: relative;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mur .vide {
+  position: absolute;
+  inset: auto 12% 12% 12%;
+  text-align: center;
+  color: var(--doux);
+  font-size: 1.15rem;
+  line-height: 1.5;
+}
+
+.marque {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2.25rem;
+}
+
+.marque .logo {
+  font-size: 2.4rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.marque .logo::first-letter {
+  color: var(--soleil);
+}
+
+.marque .baseline {
+  color: var(--doux);
+  font-size: 1rem;
+  margin-top: 0.15rem;
+}
+
+.indicateurs {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.indicateur b {
+  display: block;
+  font-size: 2.6rem;
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.indicateur.majeur b {
+  font-size: 5.5rem;
+  color: var(--soleil);
+}
+
+.indicateur span {
+  display: block;
+  color: var(--doux);
+  font-size: 0.95rem;
+  margin-top: 0.35rem;
+  max-width: 15rem;
+  line-height: 1.35;
+}
+
+.mention-demo {
+  display: block;
+  font-style: normal;
+  color: #58718a;
+  font-size: 0.82rem;
+  margin-top: 0.2rem;
+}
+
+.legende {
+  margin-top: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.1rem;
+  color: var(--doux);
+  font-size: 0.9rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--trait);
+}
+
+.legende i {
+  display: inline-block;
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 50%;
+  margin-right: 0.4rem;
+}
+
+.legende .rayon {
+  flex-basis: 100%;
+  opacity: 0.7;
+}
+
+.colonne.droite h2 {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--doux);
+  margin: 0 0 0.9rem;
+}
+
+.classement {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.classement li {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  background: var(--panneau);
+  border-radius: var(--rayon);
+  padding: 0.7rem 0.9rem;
+  font-size: 1.15rem;
+}
+
+.classement i {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  flex: none;
+}
+
+.classement .nom {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.classement .compte {
+  font-weight: 600;
+  color: var(--soleil);
+}
+
+.classement .attente {
+  color: var(--doux);
+  font-size: 0.95rem;
+  line-height: 1.4;
+  display: block;
+}
+
+.palier {
+  margin-top: 1.4rem;
+}
+
+.palier .jauge {
+  height: 6px;
+  background: var(--trait);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.palier .jauge span {
+  display: block;
+  height: 100%;
+  background: var(--soleil);
+  transition: width 0.6s ease;
+}
+
+.palier p {
+  color: var(--doux);
+  font-size: 0.9rem;
+  margin: 0.5rem 0 0;
+}
+
+.inscription-qr {
+  margin-top: auto;
+  text-align: center;
+}
+
+.qr {
+  background: #fff;
+  border-radius: var(--rayon);
+  padding: 6px;
+  overflow: hidden;
+}
+
+.qr svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.inscription-qr .qr {
+  margin: 0 auto;
+}
+
+.qr-attente {
+  background: var(--panneau);
+  border: 1px dashed var(--trait);
+  border-radius: var(--rayon);
+  margin: 0 auto;
+}
+
+.qr-echec {
+  color: var(--soleil);
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.qr-echec span {
+  display: block;
+  color: var(--doux);
+  word-break: break-all;
+}
+
+.inscription-qr p {
+  color: var(--doux);
+  font-size: 0.85rem;
+  margin: 0.6rem 0 0;
+}
+
+.titre-jeu {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--texte) !important;
+  margin: 0 0 0.7rem !important;
+}
+
+.record-mur {
+  color: var(--doux);
+  font-size: 0.85rem;
+  margin-top: 0.9rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--trait);
+}
+
+.bandeau {
+  position: absolute;
+  left: 50%;
+  bottom: 2rem;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  background: var(--panneau);
+  border: 1px solid var(--trait);
+  border-radius: 999px;
+  padding: 0.85rem 1.6rem;
+  font-size: 1.35rem;
+  box-shadow: 0 18px 50px #00000066;
+  animation: monte 0.45s cubic-bezier(0.2, 0.9, 0.3, 1);
+  max-width: 60vw;
+}
+
+.bandeau i {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  flex: none;
+}
+
+.bandeau span {
+  color: var(--doux);
+}
+
+@keyframes monte {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 1.5rem);
+  }
+}
+
+/* Alerte de base injoignable : impossible à manquer, c'est le but. */
+.alerte-base {
+  position: absolute;
+  top: 1.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 44rem;
+  background: #3a1a16f2;
+  border: 2px solid #ff8a7a;
+  border-radius: 12px;
+  padding: 0.9rem 1.4rem;
+  text-align: center;
+  z-index: 60;
+}
+
+.alerte-base b {
+  display: block;
+  color: #ff8a7a;
+  font-size: 1.15rem;
+  margin-bottom: 0.25rem;
+}
+
+.alerte-base span {
+  color: #f0c9c2;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* Sur l'écran classement, l'alerte suit le flux au lieu de flotter. */
+.alerte-base.statique {
+  position: static;
+  transform: none;
+  max-width: none;
+  margin-bottom: 1.5rem;
+}
+
+/* ───────────────────────── Tablette ───────────────────────── */
+
+.tablette {
+  min-height: 100%;
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.fil {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--doux);
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.fil span {
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid var(--trait);
+  flex: 1;
+  min-width: 5rem;
+}
+
+.fil .actif {
+  color: var(--texte);
+  border-color: var(--soleil);
+}
+
+.fil .fait {
+  border-color: var(--doux);
+}
+
+.etape {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.tablette h1 {
+  font-size: 2.1rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0 0 1.75rem;
+  line-height: 1.15;
+}
+
+.choix-roles {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.carte-role {
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  grid-template-rows: auto auto;
+  align-items: center;
+  gap: 0 1rem;
+  text-align: left;
+  background: var(--panneau);
+  border: 2px solid var(--trait);
+  color: var(--texte);
+  padding: 1.3rem 1.4rem;
+}
+
+.carte-role .icone {
+  grid-row: 1 / 3;
+  font-size: 2.1rem;
+  text-align: center;
+}
+
+.carte-role b {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.carte-role em {
+  color: var(--doux);
+  font-style: normal;
+  font-size: 0.95rem;
+}
+
+.carte-role:active {
+  transform: scale(0.985);
+}
+
+.pave-affichage {
+  display: flex;
+  gap: 0.7rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.pave-affichage .case {
+  width: 3.6rem;
+  height: 4.6rem;
+  border-radius: var(--rayon);
+  background: var(--panneau);
+  border: 2px solid var(--trait);
+  display: grid;
+  place-items: center;
+  font-size: 2.4rem;
+  font-weight: 600;
+}
+
+.pave-affichage .pleine {
+  border-color: var(--soleil);
+}
+
+.pave-touches {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.7rem;
+  max-width: 22rem;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.touche {
+  background: var(--panneau);
+  border: 1px solid var(--trait);
+  color: var(--texte);
+  font-size: 1.7rem;
+  padding: 1rem 0;
+}
+
+.touche:active {
+  background: var(--trait);
+}
+
+.touche.vide {
+  visibility: hidden;
+}
+
+.ville {
+  text-align: center;
+  color: var(--doux);
+  font-size: 1.2rem;
+  min-height: 1.6rem;
+  margin: 1.2rem 0 0;
+}
+
+.saisie {
+  font: inherit;
+  font-size: 1.4rem;
+  padding: 1rem 1.1rem;
+  border-radius: var(--rayon);
+  border: 2px solid var(--trait);
+  background: var(--panneau);
+  color: var(--texte);
+  width: 100%;
+}
+
+.saisie::placeholder {
+  color: #58718a;
+}
+
+.saisie:focus {
+  border-color: var(--soleil);
+  outline: none;
+}
+
+.choix-tailles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.1rem;
+}
+
+.puce {
+  background: transparent;
+  border: 1px solid var(--trait);
+  color: var(--doux);
+  padding: 0.75rem 1.1rem;
+  font-size: 1rem;
+}
+
+.puce.active {
+  border-color: var(--soleil);
+  color: var(--texte);
+  background: #ffc1451a;
+}
+
+.explication {
+  color: var(--doux);
+  line-height: 1.5;
+  margin: -0.9rem 0 1.5rem;
+  max-width: 34rem;
+}
+
+.erreur {
+  color: #ff8a7a;
+}
+
+.barre {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: auto;
+  padding-top: 2rem;
+}
+
+.barre button {
+  background: transparent;
+  border: 1px solid var(--trait);
+  color: var(--doux);
+  padding: 1.05rem 1.5rem;
+  font-size: 1.1rem;
+}
+
+button.principal {
+  background: var(--soleil);
+  color: #0a1622;
+  border: none;
+  font-weight: 600;
+  flex: 1;
+}
+
+button.principal:disabled {
+  background: var(--trait);
+  color: #58718a;
+  cursor: not-allowed;
+}
+
+a.bouton-lien {
+  background: var(--soleil);
+  color: #0a1622;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 1.05rem 1.5rem;
+  border-radius: var(--rayon);
+  text-align: center;
+  flex: 1;
+}
+
+/* Confirmation */
+
+.confirmation {
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+.pastille-role {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  margin-bottom: 1.75rem;
+}
+
+.confirmation .grand {
+  font-size: 1.45rem;
+  line-height: 1.45;
+  max-width: 32rem;
+  color: var(--texte);
+}
+
+.chiffres-confirmation {
+  display: flex;
+  gap: 2.5rem;
+  margin: 2rem 0 0;
+}
+
+.chiffres-confirmation b {
+  display: block;
+  font-size: 2.4rem;
+  color: var(--soleil);
+  line-height: 1;
+}
+
+.chiffres-confirmation span {
+  color: var(--doux);
+  font-size: 0.9rem;
+}
+
+.confirmation .note {
+  color: var(--doux);
+  margin-top: 2.5rem;
+}
+
+.apres-inscription {
+  display: flex;
+  gap: 0.8rem;
+  align-items: stretch;
+  margin-top: 0.5rem;
+  width: 100%;
+  max-width: 26rem;
+}
+
+.apres-inscription button {
+  background: transparent;
+  border: 1px solid var(--trait);
+  color: var(--doux);
+  padding: 1.05rem 1.4rem;
+}
+
+/* ───────────────────────── Réglages ───────────────────────── */
+
+.reglages {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+}
+
+.reglages h1 {
+  font-size: 1.9rem;
+  margin: 0 0 2rem;
+}
+
+.reglages section {
+  border-top: 1px solid var(--trait);
+  padding: 1.6rem 0;
+}
+
+.reglages h2 {
+  font-size: 1.15rem;
+  margin: 0 0 0.8rem;
+}
+
+.reglages label {
+  display: block;
+  color: var(--doux);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.reglages input:not([type='range']) {
+  font: inherit;
+  display: block;
+  padding: 0.75rem 0.9rem;
+  border-radius: var(--rayon);
+  border: 1px solid var(--trait);
+  background: var(--panneau);
+  color: var(--texte);
+  width: 100%;
+  margin-top: 0.4rem;
+}
+
+.reglages input[type='range'] {
+  width: 100%;
+  margin-top: 0.8rem;
+  accent-color: var(--soleil);
+}
+
+.reglages .curseur b {
+  color: var(--soleil);
+}
+
+.reglages button {
+  background: var(--panneau);
+  border: 1px solid var(--trait);
+  color: var(--texte);
+  padding: 0.7rem 1.1rem;
+}
+
+.reglages button.danger {
+  color: #ff8a7a;
+}
+
+.reglages .boutons {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.reglages .aide {
+  color: var(--doux);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  max-width: 38rem;
+}
+
+.reglages .message {
+  color: var(--vert);
+  font-size: 0.9rem;
+}
+
+.hypotheses {
+  color: var(--doux);
+  line-height: 1.7;
+  padding-left: 1.1rem;
+}
+
+.reglages .liens {
+  display: flex;
+  gap: 1.5rem;
+  padding-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.reglages .liens a {
+  color: var(--soleil);
+}
+
+.apercu-qr {
+  display: flex;
+  gap: 1.2rem;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.apercu-qr .qr {
+  flex: none;
+}
+
+/* ───────────────────────── Le jeu ───────────────────────── */
+
+.jeu {
+  min-height: 100%;
+  max-width: 30rem;
+  margin: 0 auto;
+  padding: 1.25rem 1.1rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.sur-titre {
+  color: var(--soleil);
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  margin: 0 0 0.6rem;
+}
+
+.accueil-jeu,
+.fin-jeu {
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  gap: 0;
+}
+
+.marque-jeu {
+  font-size: 3.2rem;
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  line-height: 1;
+  margin: 0 0 0.4rem;
+}
+
+.marque-jeu span {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--doux);
+  margin-top: 0.5rem;
+}
+
+.accroche {
+  font-size: 1.35rem;
+  color: var(--soleil);
+  margin: 0 0 1.6rem;
+}
+
+.pitch {
+  color: var(--doux);
+  line-height: 1.55;
+  max-width: 27rem;
+  margin: 0 0 1.8rem;
+}
+
+.pitch em {
+  color: var(--texte);
+  font-style: italic;
+}
+
+.regles {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  color: #58718a;
+  font-size: 0.88rem;
+  margin-bottom: 2rem;
+}
+
+.grand-bouton {
+  padding: 1.15rem 3.5rem;
+  font-size: 1.15rem;
+  flex: none;
+}
+
+.lien-discret {
+  color: var(--doux);
+  font-size: 0.9rem;
+  margin-top: 1.5rem;
+}
+
+/* Entête de partie */
+
+.entete-jeu {
+  flex: none;
+}
+
+.chrono {
+  height: 5px;
+  background: var(--trait);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.chrono span {
+  display: block;
+  height: 100%;
+  background: var(--soleil);
+  transition: width 1s linear;
+}
+
+.compteurs {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+  margin-top: 0.6rem;
+}
+
+.compteurs b {
+  font-size: 1.9rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.compteurs .combo {
+  color: #58718a;
+  font-size: 0.95rem;
+}
+
+.compteurs .combo.actif {
+  color: var(--vert);
+}
+
+.compteurs .restantes {
+  margin-left: auto;
+  color: var(--doux);
+  font-size: 0.9rem;
+}
+
+.compteurs .temps {
+  margin-left: 0.9rem;
+  color: var(--doux);
+}
+
+.compteurs .son {
+  background: transparent;
+  border: none;
+  font-size: 1.1rem;
+  padding: 0 0 0 0.4rem;
+  line-height: 1;
+  opacity: 0.75;
+}
+
+/* Bandeau producteur */
+
+.producteur {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  background: linear-gradient(180deg, #1a2c1c00, #ffc1450f);
+  border: 1px solid var(--trait);
+  border-radius: var(--rayon);
+  padding: 0.8rem 0.9rem;
+  margin: 0.9rem 0 1rem;
+  flex: none;
+}
+
+.producteur .emoji {
+  font-size: 1.8rem;
+}
+
+.producteur b {
+  display: block;
+  font-size: 1.02rem;
+}
+
+.producteur span {
+  color: var(--doux);
+  font-size: 0.82rem;
+}
+
+.reservoir {
+  margin-left: auto;
+  width: 10px;
+  height: 40px;
+  border-radius: 5px;
+  background: var(--trait);
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  flex: none;
+}
+
+.reservoir span {
+  display: block;
+  width: 100%;
+  background: var(--soleil);
+  transition: height 0.4s ease;
+}
+
+/* Pile de cartes */
+
+.zone-cartes {
+  position: relative;
+  flex: 1;
+  min-height: 22rem;
+}
+
+.fiche {
+  position: absolute;
+  inset: 0;
+  background: var(--panneau);
+  border: 1px solid var(--trait);
+  border-radius: 18px;
+  padding: 1.2rem 1.15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  box-shadow: 0 20px 45px #00000059;
+}
+
+.fiche.dessus {
+  cursor: grab;
+  touch-action: pan-y;
+  z-index: 3;
+}
+
+.fiche.dessus:active {
+  cursor: grabbing;
+}
+
+.tete-fiche {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.tete-fiche .emoji {
+  font-size: 2.4rem;
+}
+
+.tete-fiche b {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.tete-fiche span {
+  color: var(--doux);
+  font-size: 0.88rem;
+}
+
+.courbe {
+  width: 100%;
+  height: auto;
+}
+
+.courbe .aire-soleil {
+  fill: #ffc1453d;
+  stroke: #ffc14566;
+  stroke-width: 1;
+}
+
+.courbe .barre {
+  fill: #56a8ff59;
+}
+
+.courbe .barre-partagee {
+  fill: var(--vert);
+}
+
+.courbe .heure {
+  fill: #58718a;
+  font-size: 9px;
+}
+
+.legende-courbe {
+  color: #58718a;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.alerte {
+  color: #ff8a7a;
+  font-size: 0.85rem;
+  margin: auto 0 0;
+}
+
+.tampon {
+  position: absolute;
+  top: 1.4rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding: 0.35rem 1rem;
+  border-radius: 8px;
+  border: 3px solid;
+}
+
+.tampon.oui {
+  right: 1.2rem;
+  color: var(--vert);
+  border-color: var(--vert);
+  transform: rotate(12deg);
+}
+
+.tampon.non {
+  left: 1.2rem;
+  color: #ff8a7a;
+  border-color: #ff8a7a;
+  transform: rotate(-12deg);
+}
+
+/* Boutons d'action */
+
+.actions-jeu {
+  display: flex;
+  justify-content: center;
+  gap: 2.2rem;
+  padding-top: 1.3rem;
+  flex: none;
+}
+
+.rond {
+  width: 4.4rem;
+  height: 4.4rem;
+  border-radius: 50%;
+  font-size: 1.7rem;
+  border: 2px solid var(--trait);
+  background: var(--panneau);
+}
+
+.rond.non {
+  color: #ff8a7a;
+}
+
+.rond.oui {
+  color: #0a1622;
+  background: var(--soleil);
+  border-color: var(--soleil);
+}
+
+.rond:active {
+  transform: scale(0.94);
+}
+
+/* Retour immédiat — le verdict doit se voir depuis l'allée */
+
+.verdict {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(24rem, calc(100% - 2.5rem));
+  text-align: center;
+  padding: 1.6rem 1.4rem;
+  border-radius: 20px;
+  background: #0b1a28f2;
+  border: 2px solid var(--trait);
+  box-shadow: 0 24px 70px #000000a6;
+  backdrop-filter: blur(8px);
+  pointer-events: none;
+  z-index: 50;
+  animation: verdict-entre 0.34s cubic-bezier(0.16, 1.1, 0.3, 1);
+}
+
+@keyframes verdict-entre {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.82);
+  }
+}
+
+.verdict .points {
+  font-size: 3.6rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin: 0 0 0.5rem;
+}
+
+.verdict-titre {
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin: 0 0 0.4rem;
+}
+
+.verdict-phrase {
+  color: var(--doux);
+  font-size: 0.98rem;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.cout-temps {
+  color: #ff8a7a;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0.7rem 0 0;
+}
+
+.verdict.bon {
+  border-color: #7be0a880;
+  box-shadow: 0 24px 70px #000000a6, 0 0 60px #7be0a833;
+}
+.verdict.bon .points {
+  color: var(--vert);
+}
+
+.verdict.mauvais {
+  border-color: #ff8a7a99;
+  box-shadow: 0 24px 70px #000000a6, 0 0 70px #ff8a7a40;
+}
+.verdict.mauvais .points,
+.verdict.mauvais .verdict-titre {
+  color: #ff8a7a;
+}
+
+.verdict.boucle {
+  border-color: var(--soleil);
+  box-shadow: 0 24px 70px #000000a6, 0 0 90px #ffc14559;
+}
+.verdict.boucle .points,
+.verdict.boucle .verdict-titre {
+  color: var(--soleil);
+}
+
+.verdict.neutre {
+  padding: 0.9rem 1.2rem;
+  width: auto;
+  opacity: 0.9;
+}
+.verdict.neutre .verdict-titre {
+  font-size: 1rem;
+}
+
+/* Un mauvais coup secoue l'écran : on ne peut pas le manquer. */
+.partie.secouee {
+  animation: secousse 0.42s ease-in-out;
+}
+
+@keyframes secousse {
+  0%, 100% { transform: translateX(0); }
+  15% { transform: translateX(-11px); }
+  30% { transform: translateX(9px); }
+  45% { transform: translateX(-7px); }
+  60% { transform: translateX(5px); }
+  80% { transform: translateX(-3px); }
+}
+
+.partie.secouee::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, transparent 45%, #ff5a4433 100%);
+  pointer-events: none;
+  z-index: 40;
+  animation: vignette 0.5s ease-out;
+}
+
+@keyframes vignette {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+/* Fin de partie */
+
+.score-final {
+  font-size: 5.5rem;
+  font-weight: 700;
+  color: var(--soleil);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin-bottom: 1.2rem;
+}
+
+.formulaire-score {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  width: 100%;
+  max-width: 22rem;
+}
+
+.message-ok {
+  color: var(--vert);
+}
+
+.tableau-scores {
+  list-style: none;
+  padding: 0;
+  margin: 1.8rem 0 0;
+  width: 100%;
+  max-width: 22rem;
+}
+
+.tableau-scores li,
+.classement.scores li {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--trait);
+}
+
+.tableau-scores .place,
+.classement.scores .place {
+  color: var(--doux);
+  width: 1.2rem;
+}
+
+.tableau-scores .nom,
+.classement.scores .nom {
+  flex: 1;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.classement.scores li {
+  background: transparent;
+  border-radius: 0;
+  padding: 0.6rem 0.2rem;
+}
+
+.classement.scores .nom em {
+  display: block;
+  font-style: normal;
+  color: var(--doux);
+  font-size: 0.82rem;
+}
+
+.tableau-scores .pts {
+  font-weight: 600;
+  color: var(--soleil);
+}
+
+/* ───────────────────────── Écran classement ───────────────────────── */
+
+.ecran-classement {
+  min-height: 100%;
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 2rem 1.4rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.ecran-classement header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.ecran-classement h1 {
+  font-size: 2.1rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.bascule {
+  display: flex;
+  gap: 0.35rem;
+  background: var(--panneau);
+  border: 1px solid var(--trait);
+  border-radius: 999px;
+  padding: 0.25rem;
+}
+
+.bascule button {
+  background: transparent;
+  border: none;
+  color: var(--doux);
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+}
+
+.bascule button.actif {
+  background: var(--soleil);
+  color: #0a1622;
+  font-weight: 600;
+}
+
+.grand-classement {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.grand-classement li {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  padding: 0.85rem 0.6rem;
+  border-bottom: 1px solid var(--trait);
+  font-size: 1.1rem;
+}
+
+.grand-classement .place {
+  width: 2.2rem;
+  color: var(--doux);
+  font-size: 1.3rem;
+  text-align: center;
+  flex: none;
+}
+
+.grand-classement .qui {
+  flex: 1;
+  overflow: hidden;
+}
+
+.grand-classement .qui em {
+  display: block;
+  font-style: normal;
+  color: var(--doux);
+  font-size: 0.85rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.grand-classement .pts {
+  font-weight: 600;
+  font-size: 1.3rem;
+  color: var(--soleil);
+}
+
+.grand-classement .podium {
+  background: #ffc1450d;
+}
+
+.grand-classement .podium .qui {
+  font-weight: 600;
+}
+
+.vide-classement {
+  color: var(--doux);
+  font-size: 1.1rem;
+  line-height: 1.5;
+  padding: 3rem 0;
+}
+
+.ecran-classement footer {
+  margin-top: auto;
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.record {
+  color: var(--doux);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.ecran-classement footer .bouton-lien {
+  flex: none;
+  padding: 0.95rem 2.4rem;
+}
+
+/* ───────────────────────── Adaptations ───────────────────────── */
+
+@media (max-width: 1200px) {
+  .mur {
+    grid-template-columns: 17rem 1fr 17rem;
+    padding: 1.25rem;
+  }
+  .indicateur.majeur b {
+    font-size: 3.6rem;
+  }
+  .indicateur b {
+    font-size: 1.9rem;
+  }
+}
+
+@media (max-width: 820px) {
+  .mur {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto minmax(45vh, 1fr) auto;
+    height: auto;
+    min-height: 100%;
+  }
+  .indicateurs {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem 2rem;
+  }
+  .inscription-qr .qr {
+    width: 120px !important;
+    height: 120px !important;
+  }
+  .legende {
+    margin-top: 1rem;
+  }
+}
+
+@media (max-height: 700px) {
+  .zone-cartes {
+    min-height: 17rem;
+  }
+  .rond {
+    width: 3.6rem;
+    height: 3.6rem;
+    font-size: 1.4rem;
+  }
+  .verdict .points {
+    font-size: 2.8rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
