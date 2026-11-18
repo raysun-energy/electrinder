@@ -32,8 +32,13 @@ la tablette et le mur sur deux machines différentes.
 ## Brancher Supabase
 
 1. Créez un projet sur https://supabase.com (région Frankfurt).
-2. **SQL Editor → New query**, collez tout le contenu de `supabase.sql`, **Run**.
+2. **SQL Editor → New query**, collez tout le contenu de
+   `supabase/migrations/20260907120000_schema_initial.sql`, **Run**.
    Le fichier est réexécutable : il ajoute ce qui manque et n'efface rien.
+
+   Si l'intégration GitHub de Supabase est branchée sur ce dépôt
+   (Project Settings → Integrations), cette étape se fait toute seule à
+   chaque poussée sur `main`.
 3. **Project Settings → API** : relevez **Project URL** et la clé **anon public**.
 4. Créez un `.env` à la racine (voir `.env.example`) :
 
@@ -164,7 +169,7 @@ src/
   ecrans/                ← Inscription, Mur, Jeu, Classement, Réglages
   composants/            ← carte, pavé numérique, code QR, courbe de charge
   data/                  ← provinces, contour du pays, 1 145 codes postaux
-supabase.sql             ← à coller dans Supabase
+supabase/migrations/     ← le schéma, appliqué par l'intégration GitHub
 ```
 
 Les contours du pays et des 11 provinces (Natural Earth) et les codes postaux

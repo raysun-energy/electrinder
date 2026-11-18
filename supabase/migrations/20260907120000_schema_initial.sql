@@ -1,8 +1,13 @@
 -- ═══════════════════════════════════════════════════════════════
 --  Electrinder by RaYSun — schéma complet
---  À coller tel quel dans Supabase → SQL Editor → Run.
---  Réexécutable sans risque : rien n'est effacé, rien ne casse si
---  vous le relancez après une mise à jour de l'application.
+--
+--  Appliqué automatiquement par l'intégration GitHub de Supabase
+--  à chaque poussée sur main. Peut aussi se coller tel quel dans
+--  Supabase → SQL Editor → Run.
+--
+--  Entièrement idempotent : chaque objet est créé « if not exists »
+--  et chaque policy est recréée à l'identique. Le relancer sur une
+--  base déjà peuplée ne touche aucune donnée.
 -- ═══════════════════════════════════════════════════════════════
 
 -- 1. Les entreprises qui s'inscrivent au stand.
